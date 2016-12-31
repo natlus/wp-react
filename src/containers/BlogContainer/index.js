@@ -42,7 +42,7 @@ class BlogContainer extends Component {
 
   loadBlog = (perPage, slug) => {
     if (slug) {
-      if (this.props.pathname.match(/\/(.*)\//).pop() === 'category') {
+      if (this.props.location.pathname.match(/\/(.*)\//).pop() === 'category') {
         loadPostsByCategory(perPage, slug)
           .then((posts) => {
             this.setState({
@@ -52,7 +52,7 @@ class BlogContainer extends Component {
             });
           })
       }
-      else if (this.props.pathname.match(/\/(.*)\//).pop() === 'tag') {
+      else if (this.props.location.pathname.match(/\/(.*)\//).pop() === 'tag') {
         loadPostsByTag(perPage, slug)
           .then((posts) => {
             this.setState({

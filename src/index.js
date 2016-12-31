@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Match } from 'react-router';
+import { Router, Route, browserHistory } from 'react-router';
 import { injectGlobal } from 'styled-components';
 
 import BlogContainer from './containers/BlogContainer';
@@ -28,15 +28,13 @@ injectGlobal`
 `;
 
 ReactDOM.render(
-  <BrowserRouter>
-    <div>
-      <Navigation />
-      <Match pattern="/blog" component={BlogContainer} />
-      <Match pattern="/blog/:page" component={BlogContainer} />
-      <Match pattern="/post/:slug" component={SingleContainer} />
-      <Match pattern="/category/:slug" component={BlogContainer} />
-      <Match pattern="/tag/:slug" component={BlogContainer} />
-    </div>
-  </BrowserRouter>,
+  <Router history={browserHistory}>
+    <Navigation />
+    <Route path="/blog" component={BlogContainer} />
+    <Route path="/blog" component={BlogContainer} />
+    <Route path="/post/:slug" component={SingleContainer} />
+    <Route path="/category/:slug" component={BlogContainer} />
+    <Route path="/tag/:slug" component={BlogContainer} />
+  </Router>,
   document.getElementById('root')
 );

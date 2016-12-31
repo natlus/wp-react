@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Link from 'react-router/Link';
+import { Link } from 'react-router';
 
 const Bar = styled.nav`
   display: flex;
