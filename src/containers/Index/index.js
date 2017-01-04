@@ -34,7 +34,7 @@ class Index extends React.Component {
         this.setState({
           isLoading: false,
           posts: posts,
-          shouldLoadMore: posts.length !== this.state.posts.length,
+          shouldLoadMore: posts.length !== this.state.posts.length && posts.length >= perPage,
         });
       });
   }
