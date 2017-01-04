@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router';
 
 import Container from '../../components/Container';
-import { Bar, Crumb } from './styles';
+import { Bread, Crumb } from './styles';
 
 const Breadcrumbs = ({ routes }) => {
-  const list = routes.map((route, index) => {
+  const crumbs = routes.map((route, index) => {
     return (index + 1) !== routes.length
       ? (
         <Crumb key={index}>
@@ -23,9 +23,9 @@ const Breadcrumbs = ({ routes }) => {
 
   return (
     <Container>
-      <Bar>
-        {list}
-      </Bar>
+      <Bread>
+        {crumbs}
+      </Bread>
     </Container>
   )
 }
