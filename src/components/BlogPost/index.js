@@ -14,9 +14,8 @@ import {
   Tag,
 } from './styles.js';
 
-function createMarkup(html) {
-  return {__html: html};
-}
+// dangerouslySetInnerHTML
+const createMarkup = (html) => ({ __html: html });
 
 const BlogPost = ({ title, content, date, slug, categories, tags }) => {
   const timeagoInstance = new timeago();

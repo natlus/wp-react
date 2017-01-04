@@ -6,7 +6,7 @@ import Breadcrumbs from '../../components/Breadcrumbs';
 import { LoadMore } from './styles';
 
 
-const BlogLoop = ({ posts, loadMore, shouldLoadMore, param, routes }) => {
+const BlogLoop = ({ posts, loadMore, shouldLoadMore, routes }) => {
   const postLoop = posts.map((post, index) => (
     <BlogPost
       key={index}

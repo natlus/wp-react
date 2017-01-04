@@ -67,7 +67,6 @@ class Tags extends React.Component {
           posts={this.state.posts}
           loadMore={this.loadMore}
           shouldLoadMore={this.state.shouldLoadMore}
-          param={this.props.params.slug}
           routes={this.props.routes}
         />
   }
