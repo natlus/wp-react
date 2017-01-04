@@ -4,25 +4,27 @@ import Single from '../../components/Single';
 import NotFound from '../../components/NotFound';
 import Loading from '../../components/Loading';
 
-import { loadPostBySlug } from '../../helpers/request';
+import { loadSinglePost } from '../../helpers/request';
 
-class SingleContainer extends React.Component {
+class Post extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       isLoading: true,
-      post: {}
+      post: {},
     }
   }
 
   componentDidMount() {
-    loadPostBySlug(this.props.params.slug)
+    loadSinglePost(this.props.params.slug)
       .then((post) => {
         this.setState({
           isLoading: false,
-          post: post[0]
+          post: post[0],
         });
+
+        this.title = post[0].title;
       });
   }
 
@@ -36,4 +38,4 @@ class SingleContainer extends React.Component {
 
 }
 
-export default SingleContainer;
+export default Post;

@@ -4,8 +4,9 @@ import { Router, Route, browserHistory } from 'react-router';
 import { injectGlobal } from 'styled-components';
 
 import BlogContainer from './containers/BlogContainer';
-import SingleContainer from './containers/SingleContainer';
-import Navigation from './components/Navigation';
+import Post from './containers/Post';
+import Categories from './containers/Categories';
+import Tags from './containers/Tags';
 import NotFound from './components/NotFound';
 
 // Global css
@@ -30,11 +31,11 @@ injectGlobal`
 
 ReactDOM.render(
   <Router history={browserHistory}>
-    <Navigation />
-    <Route path="/blog" component={BlogContainer} />
-    <Route path="/post/:slug" component={SingleContainer} />
-    <Route path="/category/:slug" component={BlogContainer} />
-    <Route path="/tag/:slug" component={BlogContainer} />
+    <Route name="Blog" path="/blog" component={BlogContainer}>
+      <Route name="Post" path="post/:slug" component={Post} />
+      <Route name="Category" path="category/:slug" component={Categories} />
+      <Route name="Tag" path="tag/:slug" component={Tags} />
+    </Route>
     <Route path="*" component={NotFound} />
   </Router>,
   document.getElementById('root')

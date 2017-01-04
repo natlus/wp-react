@@ -2,11 +2,10 @@ import React from 'react';
 
 import BlogPost from '../../components/BlogPost';
 import Container from '../../components/Container';
-import Breadcrumbs from '../../components/Breadcrumbs';
 import { LoadMore, LoadMoreNone } from './styles';
 
 
-const BlogLoop = ({ posts, loadMore, shouldLoadMore, param }) => {
+const BlogLoop = ({ posts, loadMore, shouldLoadMore, param, routes }) => {
   const postLoop = posts.map((post, index) => (
     <BlogPost
       key={index}
@@ -25,7 +24,6 @@ const BlogLoop = ({ posts, loadMore, shouldLoadMore, param }) => {
 
   return (
     <Container>
-      <Breadcrumbs youAreHere={param} />
       {postLoop}
       {loadMoreMarkup}
     </Container>

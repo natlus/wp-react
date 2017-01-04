@@ -5,7 +5,6 @@ const Bar = styled.nav`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 22px;
 
   > * {
     padding: 4px 8px;
@@ -32,14 +31,13 @@ const Crumb = styled(Link)`
   text-decoration: none;
 `;
 
-const Current = styled.span`
+const CrumbNoLink = styled.span`
   color: #999;
   font-size: 14px;
-  text-decoration: none;
 `;
 
 export {
   Bar,
   Crumb,
-  Current,
+  CrumbNoLink,
 };

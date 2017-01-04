@@ -2,11 +2,9 @@ import React from 'react';
 
 import Container from '../../components/Container';
 import BlogPost from '../../components/BlogPost';
-import Breadcrumbs from '../../components/Breadcrumbs';
 
 const Single = ({ post }) => (
   <Container>
-    <Breadcrumbs youAreHere={post.title} />
     <BlogPost
       title={post.title}
       content={post.content}

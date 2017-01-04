@@ -69,7 +69,7 @@ const loadPosts = (perPage) => (
  * @returns {Promise.object} filtered data for a single post object
  * @returns {Promise.bool} false if `obj.data` is empty (no post was found)
  */
-const loadPostBySlug = (slug) => (
+const loadSinglePost = (slug) => (
   axios.all([getPostBySlug(slug), getCategories(), getTags()])
     .then(axios.spread((post, categories, tags) => post.data.length > 0
       ? filterPosts(post.data, categories.data, tags.data)
@@ -108,7 +108,7 @@ const loadPostsByTag = (perPage, slug) => (
 
 export {
   loadPosts,
-  loadPostBySlug,
+  loadSinglePost,
   loadPostsByCategory,
   loadPostsByTag,
 };

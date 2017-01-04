@@ -26,7 +26,7 @@ const BlogPost = ({ title, content, date, slug, categories, tags }) => {
       <Categories>
         {
           categories.map((category, index) => (
-            <Category to={`/category/${category.slug}`} key={index}>
+            <Category to={`/blog/category/${category.slug}`} key={index}>
               {category.name}
             </Category>
           ))
@@ -40,7 +40,7 @@ const BlogPost = ({ title, content, date, slug, categories, tags }) => {
       <Tags>
         {
           tags.map((tag, index) => (
-            <Tag key={index} to={`/tag/${tag.slug}`}>
+            <Tag key={index} to={`/blog/tag/${tag.slug}`}>
               {tag.name}
             </Tag>
           ))
@@ -51,7 +51,7 @@ const BlogPost = ({ title, content, date, slug, categories, tags }) => {
 
   const titleMarkup = slug
     ? (
-      <TitleLink to={`/post/${slug}`}>
+      <TitleLink to={`/blog/post/${slug}`}>
         <h2>{title}</h2>
       </TitleLink>
     )
