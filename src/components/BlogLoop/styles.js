@@ -3,8 +3,8 @@ import styled from 'styled-components';
 const LoadMore = styled.span`
   display: block;
   width: 100%;
-  background: #000;
-  color: #fff;
+  background: ${(props) => props.empty ? 'transparent' : '#000' };
+  color: ${(props) => props.empty ? '#000' : '#fff'};
   border-radius: 3px;
   text-align: center;
   padding: 22px;
@@ -12,22 +12,11 @@ const LoadMore = styled.span`
   transition: background 150ms ease;
 
   &:hover {
-    background: #222;
-    cursor: pointer;
+    background: ${(props) => props.empty ? 'transparent' : '#222' };
+    cursor: ${(props) => props.empty ? 'default' : 'pointer' };
   }
 `;
 
-const LoadMoreNone = styled.h3`
-  display: block;
-  width: 100%;
-  color: #999;
-  text-align: center;
-  padding: 22px;
-  margin-bottom: 0;
-  margin-top: 22px;
-`
-
 export {
   LoadMore,
-  LoadMoreNone,
 };

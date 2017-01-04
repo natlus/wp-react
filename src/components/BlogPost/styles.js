@@ -42,14 +42,14 @@ const Metadata = styled.div`
   font-size: 14px;
 `;
 
-const Title = styled.h1`
+const Title = styled.span`
   color: #000;
-  margin: 0;
-`;
+  font-size: 14px;
 
-const TitleLink = styled(Link)`
-  color: #000;
-  text-decoration: none;
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
   h1, h2 {
     margin: 0;
@@ -102,7 +102,6 @@ export {
   Header,
   Metadata,
   Title,
-  TitleLink,
   Wrapper,
   Tags,
   Tag,

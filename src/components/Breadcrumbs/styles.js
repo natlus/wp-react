@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router';
 
 const Bar = styled.nav`
   display: flex;
@@ -25,19 +24,19 @@ const Bar = styled.nav`
   }
 `;
 
-const Crumb = styled(Link)`
-  color: #000;
+const Crumb = styled.span`
+  color: ${(props) => props.last ? '#999' : '#000'};
   font-size: 14px;
   text-decoration: none;
-`;
+  pointer-events: ${(props) => props.last ? 'none' : 'all'};
 
-const CrumbNoLink = styled.span`
-  color: #999;
-  font-size: 14px;
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 `;
 
 export {
   Bar,
   Crumb,
-  CrumbNoLink,
 };

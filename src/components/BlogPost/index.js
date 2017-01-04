@@ -1,5 +1,6 @@
 import React from 'react';
 import timeago from 'timeago.js';
+import { Link } from 'react-router';
 
 import {
   Categories,
@@ -8,7 +9,6 @@ import {
   Header,
   Metadata,
   Title,
-  TitleLink,
   Wrapper,
   Tags,
   Tag,
@@ -51,13 +51,17 @@ const BlogPost = ({ title, content, date, slug, categories, tags }) => {
 
   const titleMarkup = slug
     ? (
-      <TitleLink to={`/blog/post/${slug}`}>
-        <h2>{title}</h2>
-      </TitleLink>
+      <Title link>
+        <h2>
+          <Link to={`/blog/post/${slug}`}>
+            {title}
+          </Link>
+        </h2>
+      </Title>
     )
     : (
       <Title>
-        {title}
+        <h1>{title}</h1>
       </Title>
     )
 

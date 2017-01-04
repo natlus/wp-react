@@ -2,7 +2,7 @@ import React from 'react';
 
 import BlogPost from '../../components/BlogPost';
 import Container from '../../components/Container';
-import { LoadMore, LoadMoreNone } from './styles';
+import { LoadMore } from './styles';
 
 
 const BlogLoop = ({ posts, loadMore, shouldLoadMore, param, routes }) => {
@@ -20,7 +20,7 @@ const BlogLoop = ({ posts, loadMore, shouldLoadMore, param, routes }) => {
 
   const loadMoreMarkup = shouldLoadMore
     ? <LoadMore onClick={loadMore}>Load more</LoadMore>
-    : <LoadMoreNone>No more posts</LoadMoreNone>
+    : <LoadMore empty>No more posts</LoadMore>
 
   return (
     <Container>

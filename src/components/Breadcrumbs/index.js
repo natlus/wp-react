@@ -1,21 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 import Container from '../../components/Container';
-import { Bar, Crumb, CrumbNoLink } from './styles';
+import { Bar, Crumb } from './styles';
 
 const Breadcrumbs = ({ routes }) => {
   const list = routes.map((route, index) => {
-    console.log(route.component);
     return (index + 1) !== routes.length
       ? (
-        <Crumb key={index} to={route.path}>
-          { route.component.title || route.name }
+        <Crumb key={index}>
+          <Link to={route.path}>
+            { route.component.title || route.name }
+          </Link>
         </Crumb>
       )
       : (
-        <CrumbNoLink key={index}>
+        <Crumb last key={index}>
           { route.component.title || route.name }
-        </CrumbNoLink>
+        </Crumb>
       )
   })
 
