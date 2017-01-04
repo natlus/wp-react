@@ -17,14 +17,17 @@ class Post extends React.Component {
   }
 
   componentDidMount() {
+    this.loadBlog(this.props.params.slug)
+  }
+
+  loadBlog = (slug) => {
     loadSinglePost(this.props.params.slug)
       .then((post) => {
+        Post.title = post[0].title; // Component title used for breadcrumbs.
         this.setState({
           isLoading: false,
           post: post[0],
         });
-
-        this.title = post[0].title;
       });
   }
 
@@ -33,7 +36,7 @@ class Post extends React.Component {
     ? <Loading />
     : !this.state.post
       ? <NotFound />
-      : <Single post={this.state.post} />
+      : <Single post={this.state.post} routes={this.props.routes} />
   }
 
 }

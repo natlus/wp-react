@@ -44,6 +44,7 @@ class Categories extends React.Component {
     if (slug) {
       loadPostsByCategory(perPage, slug)
         .then((posts) => {
+          Categories.title = posts[0].metaTitle; // Component title used for breadcrumbs
           this.setState({
             isLoading: false,
             posts: posts,
@@ -51,8 +52,6 @@ class Categories extends React.Component {
           });
         })
     }
-
-    Categories.title = slug;
   }
 
   loadMore = () => {

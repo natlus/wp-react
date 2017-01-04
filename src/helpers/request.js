@@ -23,7 +23,7 @@ const getTagsBySlug = (slug) => axios.get(`${baseUrl}/tags?slug=${slug}`);
  */
 const extractMetadata = (postMeta, rawMeta) => (
   rawMeta.filter((meta) => {
-    for (let i = 0; i < postMeta.length; i++) {
+    for (let i in postMeta) {
       if (postMeta[i] === meta.id) {
         return true;
       }
@@ -34,7 +34,7 @@ const extractMetadata = (postMeta, rawMeta) => (
 
 // Filters the raw API objects and returns a new array containing
 // the objects with only the required data
-const filterPosts = (posts, categories, tags) => {
+const filterPosts = (posts, categories, tags, metaTitle = false) => {
   return posts.map((post) => ({
     id: post.id,
     date: post.date_gmt,
@@ -45,6 +45,7 @@ const filterPosts = (posts, categories, tags) => {
     title: post.title.rendered,
     content: post.content.rendered,
     slug: post.slug,
+    metaTitle: metaTitle || '',
   }))
 }
 
@@ -89,7 +90,7 @@ const loadPostsByCategory = (perPage, slug) => (
   getCategoriesBySlug(slug)
     .then((category) => (
       axios.all([getPostsByCategory(perPage, category.data[0].id), getCategories(), getTags()])
-        .then(axios.spread((posts, categories, tags) => filterPosts(posts.data, categories.data, tags.data)))
+        .then(axios.spread((posts, categories, tags) => filterPosts(posts.data, categories.data, tags.data, category.data[0].name)))
         .catch((err) => { console.error(err) })
     ))
     .catch((err) => { console.error(err) })
@@ -100,7 +101,7 @@ const loadPostsByTag = (perPage, slug) => (
   getTagsBySlug(slug)
     .then((tag) => (
       axios.all([getPostsByTag(perPage, tag.data[0].id), getCategories(), getTags()])
-        .then(axios.spread((posts, categories, tags) => filterPosts(posts.data, categories.data, tags.data)))
+        .then(axios.spread((posts, categories, tags) => filterPosts(posts.data, categories.data, tags.data, tag.data[0].name)))
         .catch((err) => { console.error(err) })
     ))
     .catch((err) => { console.error(err) })

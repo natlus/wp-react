@@ -44,6 +44,7 @@ class Tags extends React.Component {
     if (slug) {
       loadPostsByTag(perPage, slug)
         .then((posts) => {
+          Tags.title = posts[0].metaTitle; // Component title used for breadcrumbs
           this.setState({
             isLoading: false,
             posts: posts,

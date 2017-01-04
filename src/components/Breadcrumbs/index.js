@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import Container from '../../components/Container';
 import { Bread, Crumb } from './styles';
 
 const Breadcrumbs = ({ routes }) => {
@@ -22,11 +21,9 @@ const Breadcrumbs = ({ routes }) => {
   })
 
   return (
-    <Container>
-      <Bread>
-        {crumbs}
-      </Bread>
-    </Container>
+    <Bread>
+      {crumbs}
+    </Bread>
   )
 }
 

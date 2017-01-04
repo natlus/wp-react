@@ -2,6 +2,7 @@ import React from 'react';
 
 import BlogPost from '../../components/BlogPost';
 import Container from '../../components/Container';
+import Breadcrumbs from '../../components/Breadcrumbs';
 import { LoadMore } from './styles';
 
 
@@ -24,6 +25,7 @@ const BlogLoop = ({ posts, loadMore, shouldLoadMore, param, routes }) => {
 
   return (
     <Container>
+      <Breadcrumbs routes={routes} />
       {postLoop}
       {loadMoreMarkup}
     </Container>
@@ -34,6 +36,7 @@ BlogLoop.propTypes = {
   posts: React.PropTypes.array.isRequired,
   loadMore: React.PropTypes.func.isRequired,
   shouldLoadMore: React.PropTypes.bool.isRequired,
+  routes: React.PropTypes.array.isRequired,
 };
 
 export default BlogLoop;

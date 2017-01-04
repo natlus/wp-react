@@ -8,7 +8,7 @@ const Bread = styled.nav`
   background: #fff;
   border: 1px solid #eaeaea;
   border-radius: 3px;
-  width: auto;
+  margin-bottom: 22px;
 `;
 
 const Crumb = styled.span`
