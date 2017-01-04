@@ -31,18 +31,18 @@ class Index extends React.Component {
   callLoadPosts = (perPage) => {
     loadPosts(perPage)
       .then((posts) => {
-        this.setState({
+        this.setState((prevState, props) => ({
           isLoading: false,
           posts: posts,
-          shouldLoadMore: posts.length !== this.state.posts.length && posts.length >= perPage,
-        });
+          shouldLoadMore: posts.length !== prevState.posts.length && posts.length >= perPage,
+        }));
       });
   }
 
   loadMore = () => {
-    this.setState({
+    this.setState((prevState, props) => ({
       perPage: this.state.perPage + 5, // Load more interval
-    });
+    }));
   }
 
   render() {

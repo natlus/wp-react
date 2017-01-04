@@ -45,19 +45,19 @@ class Tags extends React.Component {
       loadPostsByTag(perPage, slug)
         .then((posts) => {
           Tags.title = posts[0].metaTitle; // Component title used for breadcrumbs
-          this.setState({
+          this.setState((prevState, props) => ({
             isLoading: false,
             posts: posts,
-            shouldLoadMore: posts.length !== this.state.posts.length && posts.length >= perPage,
-          });
+            shouldLoadMore: posts.length !== prevState.posts.length && posts.length >= perPage,
+          }));
         })
     }
   }
 
   loadMore = () => {
-    this.setState({
-      perPage: this.state.perPage + 5, // Load more interval
-    });
+    this.setState((prevState, props) => ({
+      perPage: prevState.perPage + 5 // Load more interval
+    }));
   }
 
   render() {
