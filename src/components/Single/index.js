@@ -19,7 +19,7 @@ const Single = ({ post, routes }) => (
 
 Single.propTypes = {
   post: React.PropTypes.object.isRequired,
-  routes: React.PropTypes.array.isRequired,
+  routes: React.PropTypes.array,
 };
 
 export default Single;

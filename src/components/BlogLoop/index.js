@@ -11,7 +11,7 @@ const BlogLoop = ({ posts, loadMore, shouldLoadMore, param, routes }) => {
     <BlogPost
       key={index}
       title={post.title}
-      content={post.content}
+      content={post.excerpt}
       date={post.date}
       categories={post.categories}
       tags={post.tags}
@@ -36,7 +36,7 @@ BlogLoop.propTypes = {
   posts: React.PropTypes.array.isRequired,
   loadMore: React.PropTypes.func.isRequired,
   shouldLoadMore: React.PropTypes.bool.isRequired,
-  routes: React.PropTypes.array.isRequired,
+  routes: React.PropTypes.array,
 };
 
 export default BlogLoop;
