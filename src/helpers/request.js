@@ -5,7 +5,6 @@ const baseUrl = 'http://localhost:8080/wp-api/wp-json/wp/v2';
 // axios requests for different endpoints
 const getPosts = (perPage) => axios.get(`${baseUrl}/posts?per_page=${perPage}`);
 const getPostsByCategory = (perPage, category) => axios.get(`${baseUrl}/posts?per_page=${perPage}&categories=${category}`);
-// eslint-disable-next-line
 const getPostsByTag = (perPage, tag) => axios.get(`${baseUrl}/posts?per_page=${perPage}&tags=${tag}`);
 const getPostBySlug = (slug) => axios.get(`${baseUrl}/posts?slug=${slug}`);
 const getCategories = () => axios.get(`${baseUrl}/categories`);
@@ -14,22 +13,20 @@ const getCategoriesBySlug = (slug) => axios.get(`${baseUrl}/categories?slug=${sl
 const getTagsBySlug = (slug) => axios.get(`${baseUrl}/tags?slug=${slug}`);
 
 /**
- * Collect all metadata for each post in the array
- * (only ids for the metadata are exposed in `posts`)
+ * As only IDs of metadata is exposed in the `posts` endpoint
+ * we have to filter out the objects from the metadata endpoints
+ * by merging the two arrays and filtering out the objects matching
+ * each posts meta IDs.
  *
  * @param postMeta {array} data (IDs) from the `posts` endpoint
- * @param rawMeta {array} raw data from the meta endpoint
- * @returns {array} raw data for the meta matching the post
+ * @param meta {array} data from the meta endpoint
+ * @returns {array} objects matching the filter
  */
-const extractMetadata = (postMeta, rawMeta) => (
-  rawMeta.filter((meta) => {
-    for (let i in postMeta) {
-      if (postMeta[i] === meta.id) {
-        return true;
-      }
-    }
-    return false;
-  })
+
+const extractMetadata = (postMeta, meta) => (
+  postMeta.concat(meta).filter((val) => (
+    postMeta.includes(val.id) ? val : false
+  ))
 );
 
 // Filters the raw API objects and returns a new array containing
