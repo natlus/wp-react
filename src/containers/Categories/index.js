@@ -46,7 +46,7 @@ class Categories extends React.Component {
       getPostsByCategory(perPage, slug)
         .then((posts) => {
           Categories.title = posts[0].metaTitle; // Component title used for breadcrumbs
-          this.setState((prevState, props) => ({
+          this.setState(prevState => ({
             isLoading: false,
             posts: posts,
             shouldLoadMore: posts.length !== prevState.posts.length && posts.length >= perPage,
@@ -56,7 +56,7 @@ class Categories extends React.Component {
   }
 
   loadMore = () => {
-    this.setState((prevState, props) => ({
+    this.setState(prevState => ({
       perPage: prevState.perPage + 5, // Load more interval
     }));
   }
