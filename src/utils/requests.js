@@ -5,7 +5,7 @@ const baseUrl = 'http://localhost:8080/wp-api/wp-json/wp/v2';
 /**
  * All axios requests used to fetch WordPress data.
  *
- * @param obj {object} can contain the following properties:
+ * @param conf {object} request config containing the following properties:
  * @param perPage {number} Amount of post objects to fetch
  * @param metaId {number} ID property of metadata (category or tag)
  * @param slug {string} slug property of metadata or post object
@@ -13,20 +13,20 @@ const baseUrl = 'http://localhost:8080/wp-api/wp-json/wp/v2';
  */
 
 const request = {
-  allPosts(obj) {
-   return axios.get(`${baseUrl}/posts?per_page=${obj.perPage}`);
+  allPosts(conf) {
+   return axios.get(`${baseUrl}/posts?per_page=${conf.perPage}`);
   },
 
-  postsByCategory(obj) {
-   return axios.get(`${baseUrl}/posts?per_page=${obj.perPage}&categories=${obj.metaId}`)
+  postsByCategory(conf) {
+   return axios.get(`${baseUrl}/posts?per_page=${conf.perPage}&categories=${conf.metaId}`)
   },
 
-  postsByTag(obj) {
-   return axios.get(`${baseUrl}/posts?per_page=${obj.perPage}&tags=${obj.metaId}`)
+  postsByTag(conf) {
+   return axios.get(`${baseUrl}/posts?per_page=${conf.perPage}&tags=${conf.metaId}`)
   },
 
-  singlePost(obj) {
-   return axios.get(`${baseUrl}/posts?slug=${obj.slug}`);
+  singlePost(conf) {
+   return axios.get(`${baseUrl}/posts?slug=${conf.slug}`);
   },
 
   allCategories() {
@@ -37,12 +37,12 @@ const request = {
    return axios.get(`${baseUrl}/tags`);
   },
 
-  singleTag(obj) {
-   return axios.get(`${baseUrl}/tags?slug=${obj.slug}`);
+  singleTag(conf) {
+   return axios.get(`${baseUrl}/tags?slug=${conf.slug}`);
   },
 
-  singleCategory(obj) {
-   return axios.get(`${baseUrl}/categories?slug=${obj.slug}`);
+  singleCategory(conf) {
+   return axios.get(`${baseUrl}/categories?slug=${conf.slug}`);
   },
 }
 

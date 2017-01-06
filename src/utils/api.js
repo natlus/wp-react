@@ -11,7 +11,6 @@ import request from './requests';
  * @param meta {array} data from the meta endpoint
  * @returns {array} objects matching the filter
  */
-
 const extractMetadata = (postMeta, meta) => (
   postMeta.concat(meta).filter((value) => (
     postMeta.includes(value.id) ? value : false
