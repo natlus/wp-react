@@ -2,7 +2,8 @@ import React from 'react';
 
 import BlogLoop from '../../components/BlogLoop';
 import Loading from '../../components/Loading';
-import { loadPosts } from '../../helpers/request';
+
+import { getPosts } from '../../utils/api';
 
 class Index extends React.Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class Index extends React.Component {
   }
 
   callLoadPosts = (perPage) => {
-    loadPosts(perPage)
+    getPosts(perPage)
       .then((posts) => {
         this.setState((prevState, props) => ({
           isLoading: false,

@@ -2,7 +2,8 @@ import React from 'react';
 
 import BlogLoop from '../../components/BlogLoop';
 import Loading from '../../components/Loading';
-import { loadPostsByTag } from '../../helpers/request';
+
+import { getPostsByTag } from '../../utils/api';
 
 class Tags extends React.Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class Tags extends React.Component {
 
   loadBlog = (perPage, slug) => {
     if (slug) {
-      loadPostsByTag(perPage, slug)
+      getPostsByTag(perPage, slug)
         .then((posts) => {
           Tags.title = posts[0].metaTitle; // Component title used for breadcrumbs
           this.setState((prevState, props) => ({

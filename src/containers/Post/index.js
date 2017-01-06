@@ -4,7 +4,7 @@ import Single from '../../components/Single';
 import NotFound from '../../components/NotFound';
 import Loading from '../../components/Loading';
 
-import { loadSinglePost } from '../../helpers/request';
+import { getSinglePost } from '../../utils/api';
 
 class Post extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class Post extends React.Component {
   }
 
   loadBlog = (slug) => {
-    loadSinglePost(this.props.params.slug)
+    getSinglePost(this.props.params.slug)
       .then((post) => {
         Post.title = post[0].title; // Component title used for breadcrumbs.
         this.setState({
