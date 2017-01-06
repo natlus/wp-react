@@ -12,14 +12,14 @@ import request from './requests';
  * @returns {array} objects matching the filter
  */
 const extractMetadata = (postMeta, meta) => (
-  postMeta.concat(meta).filter((value) => (
+  postMeta.concat(meta).filter(value => (
     postMeta.includes(value.id) ? value : false
   ))
 );
 
 // Re-map the post objects with wanted properties
 const filterPosts = (data) => (
-  data.posts.map((post) => ({
+  data.posts.map(post => ({
     id: post.id,
     date: post.date_gmt,
     author: post.author,
@@ -47,7 +47,7 @@ const getPosts = (perPage) => (
         categories: categories.data,
         tags: tags.data,
       })
-    ))).catch((err) => { console.error(err) })
+    ))).catch(err => { console.error(err) })
 );
 
 /**
@@ -59,14 +59,14 @@ const getPosts = (perPage) => (
  */
 const getSinglePost = (slug) => (
   axios.all([request.singlePost({ slug }), request.allCategories(), request.allTags()])
-    .then(axios.spread((post, categories, tags) => post.data.length > 0
-      ? filterPosts({
+    .then(axios.spread((post, categories, tags) => post.data.length > 0 && (
+      filterPosts({
         posts: post.data,
         categories: categories.data,
         tags: tags.data,
       })
-      : false
-    )).catch((err) => { console.error(err) })
+    )
+    )).catch(err => { console.error(err) })
 );
 
 /**
@@ -78,7 +78,7 @@ const getSinglePost = (slug) => (
  */
 const getPostsByCategory = (perPage, slug) => (
   request.singleCategory({ slug })
-    .then((category) => (
+    .then(category => (
       axios.all([request.postsByCategory({ perPage, metaId: category.data[0].id }), request.allCategories(), request.allTags()])
         .then(axios.spread((posts, categories, tags) => (
           filterPosts({
@@ -87,8 +87,8 @@ const getPostsByCategory = (perPage, slug) => (
             tags: tags.data,
             metaTitle: category.data[0].name,
           })
-        ))).catch((err) => { console.error(err) })
-    )).catch((err) => { console.error(err) })
+        ))).catch(err => { console.error(err) })
+    )).catch(err => { console.error(err) })
 );
 
 /**
@@ -100,7 +100,7 @@ const getPostsByCategory = (perPage, slug) => (
  */
 const getPostsByTag = (perPage, slug) => (
   request.singleTag({ slug })
-    .then((tag) => (
+    .then(tag => (
       axios.all([request.postsByTag({ perPage, metaId: tag.data[0].id }), request.allCategories(), request.allTags()])
         .then(axios.spread((posts, categories, tags) => (
           filterPosts({
@@ -109,8 +109,8 @@ const getPostsByTag = (perPage, slug) => (
             tags: tags.data,
             metaTitle: tag.data[0].name,
           })
-        ))).catch((err) => { console.error(err) })
-    )).catch((err) => { console.error(err) })
+        ))).catch(err => { console.error(err) })
+    )).catch(err => { console.error(err) })
 );
 
 export {
