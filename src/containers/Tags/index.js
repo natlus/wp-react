@@ -18,7 +18,7 @@ class Tags extends React.Component {
   }
 
   componentDidMount() {
-    this.loadBlog(this.state.perPage, this.props.params.slug);
+    this.loadPosts(this.state.perPage, this.props.params.slug);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -26,7 +26,7 @@ class Tags extends React.Component {
     // If state `perPage` changed
     // load more posts
     if (this.state.perPage !== prevState.perPage) {
-      this.loadBlog(this.state.perPage, this.props.params.slug);
+      this.loadPosts(this.state.perPage, this.props.params.slug);
     }
 
     // If route parameter `slug` changed
@@ -37,11 +37,11 @@ class Tags extends React.Component {
         shouldLoadMore: true,
       });
 
-      this.loadBlog(this.state.perPage, this.props.params.slug);
+      this.loadPosts(this.state.perPage, this.props.params.slug);
     }
   }
 
-  loadBlog = (perPage, slug) => {
+  loadPosts = (perPage, slug) => {
     if (slug) {
       getPostsByTag(perPage, slug)
         .then((posts) => {

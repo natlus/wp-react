@@ -21,15 +21,15 @@ class Index extends React.Component {
     // If state `perPage` changed
     // load more posts
     if (this.state.perPage !== prevState.perPage) {
-      this.callLoadPosts(this.state.perPage);
+      this.loadPosts(this.state.perPage);
     }
   }
 
   componentDidMount() {
-    this.callLoadPosts(this.state.perPage);
+    this.loadPosts(this.state.perPage);
   }
 
-  callLoadPosts = (perPage) => {
+  loadPosts = (perPage) => {
     getPosts(perPage)
       .then((posts) => {
         this.setState(prevState => ({

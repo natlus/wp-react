@@ -17,10 +17,10 @@ class Post extends React.Component {
   }
 
   componentDidMount() {
-    this.loadBlog(this.props.params.slug)
+    this.loadPosts(this.props.params.slug)
   }
 
-  loadBlog = (slug) => {
+  loadPosts = (slug) => {
     getSinglePost(this.props.params.slug)
       .then((post) => {
         Post.title = post[0].title; // Component title used for breadcrumbs.
