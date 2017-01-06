@@ -62,14 +62,14 @@ class Categories extends React.Component {
   }
 
   render() {
-    return this.state.isLoading
-      ? <Loading />
-      : <BlogLoop
-          posts={this.state.posts}
-          loadMore={this.loadMore}
-          shouldLoadMore={this.state.shouldLoadMore}
-          routes={this.props.routes}
-        />
+    return this.state.isLoading ? <Loading /> : (
+      <BlogLoop
+        posts={this.state.posts}
+        loadMore={this.loadMore}
+        shouldLoadMore={this.state.shouldLoadMore}
+        routes={this.props.routes}
+      />
+    )
   }
 
 }

@@ -47,15 +47,13 @@ class Index extends React.Component {
   }
 
   render() {
-    return this.state.isLoading
-    ? <Loading />
-    : (
+    return this.state.isLoading ? <Loading /> : (
       <BlogLoop
-          posts={this.state.posts}
-          loadMore={this.loadMore}
-          shouldLoadMore={this.state.shouldLoadMore}
-          routes={this.props.routes}
-        />
+        posts={this.state.posts}
+        loadMore={this.loadMore}
+        shouldLoadMore={this.state.shouldLoadMore}
+        routes={this.props.routes}
+      />
     )
   }
 

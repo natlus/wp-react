@@ -32,11 +32,11 @@ class Post extends React.Component {
   }
 
   render() {
-    return this.state.isLoading
-    ? <Loading />
-    : !this.state.post
-      ? <NotFound />
-      : <Single post={this.state.post} routes={this.props.routes} />
+    return this.state.isLoading ? <Loading /> : (
+      !this.state.post
+        ? <NotFound />
+        : <Single post={this.state.post} routes={this.props.routes} />
+    )
   }
 
 }
