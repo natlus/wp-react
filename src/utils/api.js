@@ -13,7 +13,7 @@ import request from './requests';
  */
 const extractMetadata = (postMeta, meta) => (
   postMeta.concat(meta).filter(value => (
-    postMeta.includes(value.id) ? value : false
+    postMeta.includes(value.id) && value
   ))
 );
 
