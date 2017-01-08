@@ -41,17 +41,19 @@ class Categories extends React.Component {
     }
   }
 
-  loadPosts = (perPage, slug) => {
-    if (slug) {
-      getPostsByCategory(perPage, slug)
-        .then((posts) => {
-          Categories.title = posts[0].metaTitle; // Component title used for breadcrumbs
-          this.setState(prevState => ({
-            isLoading: false,
-            posts: posts,
-            shouldLoadMore: posts.length !== prevState.posts.length && posts.length >= perPage,
-          }));
-        })
+  loadPosts = async (perPage, slug) => {
+    try {
+      const posts = await getPostsByCategory(perPage, slug);
+
+      Categories.title = posts[0].metaTitle; // Component title used for breadcrumbs
+
+      this.setState(prevState => ({
+        isLoading: false,
+        posts: posts,
+        shouldLoadMore: posts.length !== prevState.posts.length && posts.length >= perPage,
+      }));
+    } catch(error) {
+      console.error(error);
     }
   }
 

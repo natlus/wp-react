@@ -12,38 +12,38 @@ const baseUrl = 'http://localhost:8080/wp-api/wp-json/wp/v2';
  * @returns axios.get {Promise}
  */
 
-const request = {
+const requests = {
   allPosts(conf) {
-   return axios.get(`${baseUrl}/posts?per_page=${conf.perPage}`);
+    return axios.get(`${baseUrl}/posts?per_page=${conf.perPage}`);
   },
 
   postsByCategory(conf) {
-   return axios.get(`${baseUrl}/posts?per_page=${conf.perPage}&categories=${conf.metaId}`)
+    return axios.get(`${baseUrl}/posts?per_page=${conf.perPage}&categories=${conf.metaId}`)
   },
 
   postsByTag(conf) {
-   return axios.get(`${baseUrl}/posts?per_page=${conf.perPage}&tags=${conf.metaId}`)
+    return axios.get(`${baseUrl}/posts?per_page=${conf.perPage}&tags=${conf.metaId}`)
   },
 
   singlePost(conf) {
-   return axios.get(`${baseUrl}/posts?slug=${conf.slug}`);
+    return axios.get(`${baseUrl}/posts?slug=${conf.slug}`);
   },
 
   allCategories() {
-   return axios.get(`${baseUrl}/categories`);
+    return axios.get(`${baseUrl}/categories`);
   },
 
   allTags() {
-   return axios.get(`${baseUrl}/tags`);
+    return axios.get(`${baseUrl}/tags`);
   },
 
   singleTag(conf) {
-   return axios.get(`${baseUrl}/tags?slug=${conf.slug}`);
+    return axios.get(`${baseUrl}/tags?slug=${conf.slug}`);
   },
 
   singleCategory(conf) {
-   return axios.get(`${baseUrl}/categories?slug=${conf.slug}`);
+    return axios.get(`${baseUrl}/categories?slug=${conf.slug}`);
   },
 }
 
-export default request;
+export default requests;

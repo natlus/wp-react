@@ -1,5 +1,4 @@
-import axios from 'axios';
-import request from './requests';
+import requests from './requests';
 
 /**
  * As only IDs of metadata is exposed in the `posts` endpoint
@@ -39,16 +38,23 @@ const filterPosts = (data) => (
  * @param perPage {number} the amount of posts to fetch
  * @returns {Promise.array} filtered posts data
  */
-const getPosts = (perPage) => (
-  axios.all([ request.allPosts({ perPage }), request.allCategories(), request.allTags() ])
-    .then(axios.spread((posts, categories, tags) => (
+async function getPosts(perPage) {
+  try {
+    const posts = await requests.allPosts({ perPage });
+    const categories = await requests.allCategories();
+    const tags = await requests.allTags();
+
+    return (
       filterPosts({
         posts: posts.data,
         categories: categories.data,
         tags: tags.data,
       })
-    ))).catch(err => { console.error(err) })
-);
+    )
+  } catch(err) {
+    console.error(err);
+  }
+}
 
 /**
  * Get a single post and its metadata
@@ -57,17 +63,23 @@ const getPosts = (perPage) => (
  * @returns {Promise.object} filtered data for a single post object
  * @returns {Promise.bool} false if `obj.data` is empty (no post was found)
  */
-const getSinglePost = (slug) => (
-  axios.all([request.singlePost({ slug }), request.allCategories(), request.allTags()])
-    .then(axios.spread((post, categories, tags) => post.data.length > 0 && (
+async function getSinglePost(slug) {
+  try {
+    const posts = await requests.singlePost({ slug });
+    const categories = await requests.allCategories();
+    const tags = await requests.allTags();
+
+    return (
       filterPosts({
-        posts: post.data,
+        posts: posts.data,
         categories: categories.data,
         tags: tags.data,
       })
     )
-    )).catch(err => { console.error(err) })
-);
+  } catch(err) {
+    console.error(err);
+  }
+}
 
 /**
  * Get all posts from a specific category on the `/category/:slug` route
@@ -76,20 +88,25 @@ const getSinglePost = (slug) => (
  * @param slug {string} the slug of the category
  * @returns {Promise.array} filtered posts data
  */
-const getPostsByCategory = (perPage, slug) => (
-  request.singleCategory({ slug })
-    .then(category => (
-      axios.all([request.postsByCategory({ perPage, metaId: category.data[0].id }), request.allCategories(), request.allTags()])
-        .then(axios.spread((posts, categories, tags) => (
-          filterPosts({
-            posts: posts.data,
-            categories: categories.data,
-            tags: tags.data,
-            metaTitle: category.data[0].name,
-          })
-        ))).catch(err => { console.error(err) })
-    )).catch(err => { console.error(err) })
-);
+async function getPostsByCategory(perPage, slug) {
+  try {
+    const category = await requests.singleCategory({ slug });
+    const posts = await requests.postsByCategory({ perPage, metaId: category.data[0].id });
+    const categories = await requests.allCategories();
+    const tags = await requests.allTags();
+
+    return (
+      filterPosts({
+        posts: posts.data,
+        categories: categories.data,
+        tags: tags.data,
+        metaTitle: category.data[0].name,
+      })
+    )
+  } catch(error) {
+    console.error(error);
+  }
+}
 
 /**
  * Get all posts from a specific tag on the `/tag/:slug` route
@@ -98,20 +115,25 @@ const getPostsByCategory = (perPage, slug) => (
  * @param slug {string} the slug of the tag
  * @returns {Promise.array} filtered posts data
  */
-const getPostsByTag = (perPage, slug) => (
-  request.singleTag({ slug })
-    .then(tag => (
-      axios.all([request.postsByTag({ perPage, metaId: tag.data[0].id }), request.allCategories(), request.allTags()])
-        .then(axios.spread((posts, categories, tags) => (
-          filterPosts({
-            posts: posts.data,
-            categories: categories.data,
-            tags: tags.data,
-            metaTitle: tag.data[0].name,
-          })
-        ))).catch(err => { console.error(err) })
-    )).catch(err => { console.error(err) })
-);
+async function getPostsByTag(perPage, slug) {
+  try {
+    const tag = await requests.singleTag({ slug });
+    const posts = await requests.postsByTag({ perPage, metaId: tag.data[0].id });
+    const categories = await requests.allCategories();
+    const tags = await requests.allTags();
+
+    return (
+      filterPosts({
+        posts: posts.data,
+        categories: categories.data,
+        tags: tags.data,
+        metaTitle: tag.data[0].name,
+      })
+    )
+  } catch(error) {
+    console.error(error);
+  }
+}
 
 export {
   getPosts,

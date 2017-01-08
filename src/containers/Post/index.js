@@ -20,15 +20,19 @@ class Post extends React.Component {
     this.loadPosts(this.props.params.slug)
   }
 
-  loadPosts = (slug) => {
-    getSinglePost(this.props.params.slug)
-      .then((post) => {
-        Post.title = post[0].title; // Component title used for breadcrumbs.
-        this.setState({
-          isLoading: false,
-          post: post[0],
-        });
+  loadPosts = async (perPage) => {
+    try {
+      const posts = await getSinglePost(this.props.params.slug);
+
+      Post.title = posts[0].title; // Component title used for breadcrumbs.
+
+      this.setState({
+        isLoading: false,
+        post: posts[0],
       });
+    } catch(error) {
+      console.error(error);
+    }
   }
 
   render() {
