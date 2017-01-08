@@ -1,4 +1,5 @@
 import requests from './requests';
+import axios from 'axios';
 
 /**
  * As only IDs of metadata is exposed in the `posts` endpoint
@@ -40,9 +41,11 @@ const filterPosts = (data) => (
  */
 async function getPosts(perPage) {
   try {
-    const posts = await requests.allPosts({ perPage });
-    const categories = await requests.allCategories();
-    const tags = await requests.allTags();
+    const [posts, categories, tags] = await axios.all([
+      requests.allPosts({ perPage }),
+      requests.allCategories(),
+      requests.allTags(),
+    ]);
 
     return (
       filterPosts({
@@ -50,7 +53,7 @@ async function getPosts(perPage) {
         categories: categories.data,
         tags: tags.data,
       })
-    )
+    );
   } catch(err) {
     console.error(err);
   }
@@ -65,9 +68,11 @@ async function getPosts(perPage) {
  */
 async function getSinglePost(slug) {
   try {
-    const posts = await requests.singlePost({ slug });
-    const categories = await requests.allCategories();
-    const tags = await requests.allTags();
+    const [posts, categories, tags] = await axios.all([
+      requests.singlePost({ slug }),
+      requests.allCategories(),
+      requests.allTags(),
+    ]);
 
     return (
       filterPosts({
@@ -75,7 +80,7 @@ async function getSinglePost(slug) {
         categories: categories.data,
         tags: tags.data,
       })
-    )
+    );
   } catch(err) {
     console.error(err);
   }
@@ -91,9 +96,11 @@ async function getSinglePost(slug) {
 async function getPostsByCategory(perPage, slug) {
   try {
     const category = await requests.singleCategory({ slug });
-    const posts = await requests.postsByCategory({ perPage, metaId: category.data[0].id });
-    const categories = await requests.allCategories();
-    const tags = await requests.allTags();
+    const [posts, categories, tags] = await axios.all([
+      requests.postsByCategory({ perPage, metaId: category.data[0].id }),
+      requests.allCategories(),
+      requests.allTags(),
+    ]);
 
     return (
       filterPosts({
@@ -118,9 +125,11 @@ async function getPostsByCategory(perPage, slug) {
 async function getPostsByTag(perPage, slug) {
   try {
     const tag = await requests.singleTag({ slug });
-    const posts = await requests.postsByTag({ perPage, metaId: tag.data[0].id });
-    const categories = await requests.allCategories();
-    const tags = await requests.allTags();
+    const [posts, categories, tags] = await axios.all([
+      requests.postsByTag({ perPage, metaId: tag.data[0].id }),
+      requests.allCategories(),
+      requests.allTags(),
+    ]);
 
     return (
       filterPosts({
