@@ -41,12 +41,12 @@ class Tags extends React.Component {
     }
   }
 
-  loadPosts = async (perPage, slug) => {
+  async loadPosts(perPage, slug) {
     try {
       const posts = await getPostsByTag(perPage, slug);
 
       Tags.title = posts[0].metaTitle; // Component title used for breadcrumbs
-      
+
       this.setState(prevState => ({
         isLoading: false,
         posts: posts,
@@ -57,7 +57,7 @@ class Tags extends React.Component {
     }
   }
 
-  loadMore = () => {
+  loadMore() {
     this.setState(prevState => ({
       perPage: prevState.perPage + 5 // Load more interval
     }));

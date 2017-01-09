@@ -20,7 +20,7 @@ class Post extends React.Component {
     this.loadPosts(this.props.params.slug)
   }
 
-  loadPosts = async (perPage) => {
+  async loadPosts(perPage) {
     try {
       const posts = await getSinglePost(this.props.params.slug);
 

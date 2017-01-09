@@ -29,7 +29,7 @@ class Index extends React.Component {
     this.loadPosts(this.state.perPage);
   }
 
-  loadPosts = async (perPage) => {
+  async loadPosts(perPage) {
     try {
       const posts = await getPosts(perPage);
 
@@ -43,7 +43,7 @@ class Index extends React.Component {
     }
   }
 
-  loadMore = () => {
+  loadMore() {
     this.setState(prevState => ({
       perPage: this.state.perPage + 5, // Load more interval
     }));

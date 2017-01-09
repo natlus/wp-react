@@ -41,7 +41,7 @@ class Categories extends React.Component {
     }
   }
 
-  loadPosts = async (perPage, slug) => {
+  async loadPosts(perPage, slug) {
     try {
       const posts = await getPostsByCategory(perPage, slug);
 
@@ -57,7 +57,7 @@ class Categories extends React.Component {
     }
   }
 
-  loadMore = () => {
+  loadMore() {
     this.setState(prevState => ({
       perPage: prevState.perPage + 5, // Load more interval
     }));
