@@ -5,31 +5,28 @@ import Container from '../../components/Container';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import { LoadMore } from './styles';
 
-
 const BlogLoop = ({ posts, loadMore, shouldLoadMore, routes }) => {
-  const postLoop = posts.map((post, index) => (
-    <BlogPost
-      key={index}
-      title={post.title}
-      content={post.excerpt}
-      date={post.date}
-      categories={post.categories}
-      tags={post.tags}
-      slug={post.slug}
-    />
-  ));
-
-  const loadMoreMarkup = shouldLoadMore
+  const loadMoreButton = shouldLoadMore
     ? <LoadMore onClick={loadMore}>Load more</LoadMore>
-    : <LoadMore empty>No more posts</LoadMore>
+    : <LoadMore empty>No more posts</LoadMore>;
 
   return (
     <Container>
       <Breadcrumbs routes={routes} />
-      {postLoop}
-      {loadMoreMarkup}
+      {posts.map(post => (
+        <BlogPost
+          key={post.id}
+          title={post.title}
+          content={post.excerpt}
+          date={post.date}
+          categories={post.categories}
+          tags={post.tags}
+          slug={post.slug}
+        />
+      ))}
+      {loadMoreButton}
     </Container>
-  )
+  );
 };
 
 BlogLoop.propTypes = {
